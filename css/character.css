@@ -1,0 +1,41 @@
+/* sprite.player {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    height: 64px;
+    width: 64px;
+    image-rendering: pixelated;
+    background: url("../assets/character/raw.png");
+} */
+
+sprite.goRight {
+    transform: scaleX(1) !important;
+    animation: playerWalk 0.8s steps(6) infinite;
+    background-position: 0px 128px;
+}
+sprite.goLeft {
+    transform: scaleX(-1) !important;
+    animation: playerWalk 0.8s steps(6) infinite;
+    background-position: 0px 128px;
+}
+@keyframes playerWalk {
+    to { background-position: -384px 128px}
+}
+
+sprite.goUp {
+    transform: scaleX(-1) !important;
+    animation: playerWalkUp 0.8s steps(6) infinite;
+    background-position: 0px 192px;
+}
+@keyframes playerWalkUp {
+    to { background-position: -384px 192px}
+}
+
+sprite.goDown {
+    transform: scaleX(-1) !important;
+    animation: playerWalkDown 0.8s steps(6) infinite;
+    background-position: 0px 256px;
+}
+@keyframes playerWalkDown {
+    to { background-position: -384px 256px}
+}
