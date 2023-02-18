@@ -1,6 +1,7 @@
 const socket = new WebSocket('ws://localhost:8080');
 
 let playerID = null;
+let startTime;
 
 socket.onmessage = function(event) {
   let data = JSON.parse(event.data);
@@ -27,14 +28,26 @@ socket.onmessage = function(event) {
       let gameMap = new GameMap;
       gameMap.displayMap(data.map)
       break;
+    case 'pong':
+      const latency = performance.now() - startTime;
+      console.log(`Latence : ${latency}ms`);
+      break;
     default:
       console.error('Message non reconnu reçu du serveur : ', data);
       break;
   }
 };
 
+setInterval(function() {
+  startTime = performance.now();
+  socket.send(JSON.stringify({type: 'ping'}));
+}, 1500);
+
 socket.onclose = function() {
   console.error('Connexion fermée');
+  setInterval(function() {
+    location.reload();
+  }, 5000)
 };
 
 function login(id) {
